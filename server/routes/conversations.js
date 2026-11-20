@@ -106,7 +106,19 @@ router.post("/:id/messages", chatLimiter, async (req, res) => {
     conversation: conversation._id,
     role: "assistant",
     content: reply,
-  });
+  }
+  
+);
+  // first reply of this chat: count it as one use of the persona (not for the creator's own chats)
+  if (
+    conversation.title === "New chat" &&
+    String(conversation.persona.createdBy) !== String(req.userId)
+  ) {
+    await Persona.updateOne(
+      { _id: conversation.persona._id },
+      { $inc: { usesCount: 1 } }
+    );
+  } 
 
   const title =
     conversation.title === "New chat" ? text.slice(0, 40) : conversation.title;

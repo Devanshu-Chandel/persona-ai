@@ -12,8 +12,10 @@ const personaSchema = new mongoose.Schema(
       ref: "User",
       default: null,
     },
+    likedBy: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
+    usesCount: { type: Number, default: 0 },
   },
   { timestamps: true }
 );
 
-module.exports = mongoose.model("Persona", personaSchema);  
+module.exports = mongoose.model("Persona", personaSchema);

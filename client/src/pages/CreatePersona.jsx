@@ -70,7 +70,7 @@ export default function CreatePersona() {
           </div>
 
           <label className="flex flex-col gap-1 text-sm text-zinc-400">
-            Tagline
+                        Short description (shown on the card)
             <input
               name="tagline"
               value={form.tagline}
@@ -105,7 +105,8 @@ export default function CreatePersona() {
               checked={form.isPublic}
               onChange={handleChange}
             />
-            Make this persona public (other users can chat with it)
+            Share with the community (your name and this card will be visible
+            to other users)
           </label>
 
           {error && <p className="text-sm text-red-400">{error}</p>}
